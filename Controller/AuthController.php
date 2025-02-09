@@ -10,12 +10,20 @@ class AuthController extends Controller
 {
     
     public function register (Request $request){
-        $register = new ModelsRegisterModel();
+    //    echo "ascasc";
+       $registerModel = new ModelsRegisterModel;
        if($request->isPost()){
         
+        $registerModel->loadData($request->getBody());
+        if($registerModel->validate() && $registerModel->register()){
+            return "Success";
+        }
+        return $this->render("register",[
+        'model' => $registerModel]);
        }
         $this->setLayout("Auth"); 
-        return $this->render("Register");
+        return $this->render("register",[
+            'model' => $registerModel]);    
     }
     public function login (){
         $this->setLayout("Auth"); 
