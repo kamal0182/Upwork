@@ -15,14 +15,15 @@ class Field
     }
     public function __toString()
     {
+        $this->model->getFirstError($this->attribute);
         return sprintf('
         <div class="form-group">
         <label>%s</label>
-        <input type="%s" name="%s" value="%s" class="form-control%s"
+        <input type="%s" name="%s" value="%s" class="form-control %s"
         </div>
-        <div>
+        <div class="">
         %s
-        </div>
+        </div class="invalid-feedback">
         ',
         $this->attribute,
         $this->type,
@@ -35,5 +36,6 @@ class Field
     public function typePassword()
     {
         $this->type = self::TYPE_PASSWORD;
+        return $this;
     }
 }

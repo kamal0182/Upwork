@@ -65,16 +65,12 @@ abstract class Model
             $message = str_replace("{{$key}}", $value,$message);
         }
     }
-        
-        
-        
-        $this->errors[$attribute][] =  $message ;
-        
+        $this->errors[$attribute][] =  $message ;   
     }
     public function errorMessage(){
         return [
             self::RULE_REQUIRED => 'this field is required',
-             self::RULE_MIN => 'Min length of this field must be {min}',
+             self::RULE_MIN => 'Min length of this field be {min}',
              self::RULE_MATCH => 'this field is must match {match}',
              self::RULE_EMAIL => 'this field must be valid email addres',
              self::RULE_MAX => 'Min length of this field must be {max}',
@@ -86,11 +82,10 @@ abstract class Model
     }
     public function getFirstError($attribute)
     {
-        $this->errors[$attribute][0] ?? '';
+        return $this->errors[$attribute][0] ?? '';
     }
     public function getAttribute($attribute)
      {
-        echo "name : " .$this->{$attribute};
         return $this->{$attribute};
      }
 }
